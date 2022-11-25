@@ -160,11 +160,12 @@ class MoviesRemoteDatasourceImplementation implements IMoviesRemoteDatasource {
   }
 
   @override
-  Future<List<MoviesEntity>> postRatingMovie(int movieId, int rate) async {
+  Future<void> postRatingMovie(int movieId, int rate) async {
     final response = await _dio.post(
-        "$mainUrl/movie/$movieId/rating?api_key=$apiKey&session_id=$sessionId", data: {'value': rate});
+        "$mainUrl/movie/$movieId/rating?api_key=$apiKey&session_id=$sessionId",
+        data: {'value': rate});
     if (response.statusCode != 201) {
       throw ServerException();
-    } 
+    }
   }
 }

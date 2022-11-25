@@ -15,5 +15,5 @@ abstract class IMoviesRemoteDatasource {
   Future<List<MoviesEntity>> getSimilarMovies(int movieId);
   Future<List<PersonEntity>> getTrendingPerson();
   Future<List<MoviesEntity>> getMoviesBySeach(String query);
-  Future<List<MoviesEntity>> postRatingMovie(int movieId, int rate);
+  Future<void> postRatingMovie(int movieId, int rate);
 }

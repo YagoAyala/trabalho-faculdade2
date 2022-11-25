@@ -117,13 +117,13 @@ class MoviesRepositoryImplementation implements IMoviesRepository {
     }
   }
 
-    @override
-  Future<Either<Failure, List<MoviesEntity>>> postRatingMovie(
-      int movieId, int rate) async {
+  @override
+  Future<void> postRatingMovie(int movieId, int rate) async {
     try {
-      final movies = await moviesRemoteDatasource.postRatingMovie(movieId, rate);
+      final movies =
+          await moviesRemoteDatasource.postRatingMovie(movieId, rate);
     } on ServerException {
-      return Left(ServerFailure());
+      print("Erro de server exception");
     }
   }
 }
