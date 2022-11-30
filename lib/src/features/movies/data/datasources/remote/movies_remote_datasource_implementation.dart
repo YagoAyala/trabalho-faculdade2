@@ -159,6 +159,22 @@ class MoviesRemoteDatasourceImplementation implements IMoviesRemoteDatasource {
     }
   }
 
+    @override
+  Future<List<MoviesEntity>> getRating() async {
+    final response = await _dio.get(
+        '$mainUrl/rated/movie?api_key=$apiKey&session_id=$sessionId&sort_by=created_at.asc&page=1');
+    if (response.statusCode == 200) {
+      var searchMovies = response.data['results'] as List;
+      return List<MoviesModel>.from(
+        searchMovies.map(
+          (movie) => MoviesModel.fromJson(movie),
+        ),
+      );
+    } else {
+      throw ServerException();
+    }
+  }
+
   @override
   Future<void> postRatingMovie(int movieId, int rate) async {
     final response = await _dio.post(

@@ -117,6 +117,18 @@ class MoviesRepositoryImplementation implements IMoviesRepository {
     }
   }
 
+    @override
+  Future<Either<Failure, List<MoviesEntity>>> getRating() async {
+    try {
+      final moviesSearched =
+          await moviesRemoteDatasource.getRating();
+
+      return Right(moviesSearched);
+    } on ServerException {
+      return Left(ServerFailure());
+    }
+  }
+
   @override
   Future<void> postRatingMovie(int movieId, int rate) async {
     try {
